@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import type { AppProps } from "next/app";
+import { AppProps } from "next/app";
 import Layout from "../components/Layout";
 import Head from "next/head";
 import Script from "next/script";
@@ -9,6 +9,10 @@ function MyApp({ Component, pageProps }: AppProps) {
     <Layout>
       <Head>
         <title>yipp</title>
+        <link
+          rel="stylesheet"
+          href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.css"
+        />
       </Head>
       <Script
         data-domain="yipp.dev"

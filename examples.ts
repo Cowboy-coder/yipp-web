@@ -58,19 +58,17 @@ const examples = [
     ast: parse(`
       """
       Supports multi-line
-      documentation
+      documentation...
       """
       enum UserType {
-        "and single-line"
+        "...and single-line."
         Admin
         User
       }
 
-      """
-      ... and different parts
-      """
+      "And almost everything..."
       getUser: GET /users/:id(Int) {
-        "... can be documented."
+        "...can be documented."
         200: {
           "\\_👀_/"
           body: {
@@ -170,12 +168,6 @@ const examples = [
     id: "union-types",
     name: "Union types",
     ast: parse(`
-      enum FeedType {
-        Video
-        Photo
-        Post
-      }
-
       type Video {
         id: String!
         videoUrl: String!
@@ -250,11 +242,18 @@ const examples = [
         user
       }
 
+      type Address {
+        city: String!
+        zipCode: String!
+        street: String!
+      }
+
       type User {
         id: Int!
         username: String!
         age: Int!
         type: UserType!
+        address: Address!
         createdAt: DateTime!
       }
 
@@ -267,9 +266,7 @@ const examples = [
 
           200: {
             body: {
-              """
-              The JWT token.
-              """
+              "The JWT token"
               token: String!
             }
           }
@@ -291,15 +288,14 @@ const examples = [
           headers: IsLoggedIn
 
           query: {
+            "Full-text-search"
             q: String
+            perPage: Int
+            page: Int
           }
 
           200: {
             body: [User!]
-          }
-
-          400: {
-            body: Error
           }
         }
 
@@ -311,7 +307,7 @@ const examples = [
             body: User
           }
 
-          400: {
+          404: {
             body: Error
           }
         }
@@ -323,6 +319,7 @@ const examples = [
           body: {
             username: String!
             age: Int!
+            address: Address!
           }
 
           200: {
@@ -340,6 +337,11 @@ const examples = [
           body: {
             username: String
             age: Int
+            address: {
+              city: String
+              zipCode: String
+              street: String
+            }
             "only admins can set this"
             type: UserType
           }

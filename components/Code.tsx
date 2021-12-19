@@ -46,7 +46,7 @@ const Field = ({
   if (!obj) {
     return null;
   }
-  const docs = obj.variableType !== "Object" ? obj.docs : undefined;
+  const docs = "docs" in obj ? obj.docs : undefined;
   return (
     <>
       <Comment docs={docs} indent={indent} />
@@ -143,7 +143,6 @@ const Api = ({ api, indent }: { api: ApiDefinition; indent: number }) => {
       {(["headers", "query", "body"] as const).map((type) =>
         api[type] ? (
           <React.Fragment key={type}>
-            <Comment docs={api[type]?.docs} indent={indent + 1} />
             <br />
             <Field field={type} obj={api[type]} indent={indent + 1} />
           </React.Fragment>
@@ -163,7 +162,6 @@ const Api = ({ api, indent }: { api: ApiDefinition; indent: number }) => {
               r[type] ? (
                 <React.Fragment key={type}>
                   <br />
-                  <Comment docs={r[type]?.docs} indent={indent + 2} />
                   <Field field={type} obj={r[type]} indent={indent + 2} />
                 </React.Fragment>
               ) : undefined
@@ -247,7 +245,12 @@ const Code = ({ ast }: { ast: Ast }) => {
                 {definition.apis.map((api, i) => (
                   <React.Fragment key={i}>
                     <Api api={api} indent={1} />
-                    {i !== definition.apis.length - 1 ? <br /> : null}
+                    {i < definition.apis.length - 1 ? (
+                      <>
+                        <br />
+                        <br />
+                      </>
+                    ) : null}
                   </React.Fragment>
                 ))}
                 <br />

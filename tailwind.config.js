@@ -4,6 +4,9 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    fontFamily: {
+      mono: ["Hack", "ui-monospace", "monospace"],
+    },
     extend: {},
   },
   plugins: [],
