@@ -5,5 +5,9 @@
 @layer base {
   body {
     @apply bg-zinc-800/95;
+    @apply text-amber-100;
+  }
+  a {
+    @apply text-sky-500;
   }
 }
